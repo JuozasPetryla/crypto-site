@@ -1,0 +1,8 @@
+@import "~bootstrap/scss/bootstrap.scss";
+@import "variables.scss";
+
+body {
+  font: 62.5% $global-font-stack;
+  color: $global-primary-color;
+  background-color: $global-body-background;
+}

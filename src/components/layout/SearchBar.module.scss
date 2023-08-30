@@ -1,0 +1,35 @@
+@import "../../variables.scss";
+
+.search {
+  height: 4rem;
+  padding-top: 0.6rem;
+  background-color: $global-component-background;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.input {
+  width: 80%;
+  height: 2rem;
+  border-radius: 5px;
+  padding-left: 0.4rem;
+  font-size: 1rem;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.error {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  color: $global-invalid;
+  font-size: 0.8rem;
+}
+
+.invalid {
+  border: 3px solid $global-invalid;
+}
