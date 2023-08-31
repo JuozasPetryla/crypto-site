@@ -7,20 +7,18 @@ function SearchBar() {
 
   function inputChange(e) {
     setInputValue(e.target.value);
-    console.log(searchIsValid);
   }
 
   useEffect(() => {
+    function validateInput() {
+      if (inputValue.length === 30) {
+        setSearchIsValid(false);
+      } else {
+        setSearchIsValid(true);
+      }
+    }
     validateInput();
   }, [inputValue]);
-
-  function validateInput() {
-    if (inputValue.length === 30) {
-      setSearchIsValid(false);
-    } else {
-      setSearchIsValid(true);
-    }
-  }
 
   return (
     <div className={classes.search}>
