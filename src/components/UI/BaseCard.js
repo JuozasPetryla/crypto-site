@@ -1,9 +1,13 @@
-import { useSelector } from "react-redux";
-
-function BaseCard() {
-  const cryptosList = useSelector((state) => state.cryptosSlice.cryptosList);
-  console.log(cryptosList);
-  return <div className="card" style="width: 20rem"></div>;
+import classes from "./BaseCard.module.scss";
+function BaseCard(props) {
+  return (
+    <div className={"card " + classes["card-base"]}>
+      <div className="card-body">
+        <h5 className="card-title">{props.title}</h5>
+        <p className="card-text">{props.price}</p>
+      </div>
+    </div>
+  );
 }
 
-export default BaseCard
+export default BaseCard;
