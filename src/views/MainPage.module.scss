@@ -1,8 +1,8 @@
 .main-page {
-  margin-top: 4.8rem;
+  margin: 4.8rem 0;
   padding: 0 6.4rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  justify-content: center;
+  justify-items: center;
   gap: 1.2rem;
 }

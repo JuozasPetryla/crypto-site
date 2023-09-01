@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SearchBar from "./SearchBar";
+import classes from "./Header.module.scss";
 
 function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -14,7 +15,7 @@ function Header() {
         <button
           onClick={toggleSearch}
           type="button"
-          className="btn btn-secondary mx-auto"
+          className={"btn btn-secondary mx-auto " + classes.button}
         >
           Open search
         </button>

@@ -4,13 +4,26 @@ import { useSelector } from "react-redux";
 
 function MainPage() {
   const cryptosList = useSelector((state) => state.crypto.cryptosList);
+  const cryptosInfoList = useSelector((state) => state.crypto.cryptosInfoList);
+  console.log(cryptosList);
+  console.log(cryptosInfoList);
   return (
     <div className={classes["main-page"]}>
       {cryptosList.map((crypto) => (
         <BaseCard
-          title={crypto?.symbol}
+          symbol={crypto?.symbol}
           key={crypto?.symbol}
-          price={crypto?.ask}
+          name={
+            cryptosInfoList.find(
+              (cryptoInfo) => cryptoInfo.id === crypto?.symbol.split("/")[0]
+            )?.name
+          }
+          price={crypto?.last}
+          logo={
+            cryptosInfoList.find(
+              (cryptoInfo) => cryptoInfo.id === crypto?.symbol.split("/")[0]
+            )?.logoUrl ?? ""
+          }
         ></BaseCard>
       ))}
     </div>
