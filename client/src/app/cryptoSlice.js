@@ -1,13 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { coinbasepro } from "ccxt";
+import {  coinbasepro } from "ccxt";
+import axios from "axios";
 
 export const fetchCryptos = createAsyncThunk(
   "cryptosList/fetchCryptos",
   async (pageNum = 1) => {
     try {
       const exchange = new coinbasepro();
+
       const currencies = await exchange.fetchTickers();
       const currencyArray = Object.values(currencies);
+
       const filteredArray = currencyArray.filter((currency) => {
         return (
           currency.symbol.includes("USD") &&
@@ -24,6 +27,7 @@ export const fetchCryptos = createAsyncThunk(
       const startIndex = (pageNum - 1) * 20;
       const endIndex = startIndex + 20;
       const pagedArray = sortedArray.slice(startIndex, endIndex);
+
       return pagedArray;
     } catch (err) {
       console.log(err.message);
@@ -38,7 +42,6 @@ export const fetchCryptosInfo = createAsyncThunk(
       const exchange = new coinbasepro();
       const currenciesInfo = await exchange.fetchCurrencies();
       const currencyInfoArray = Object.values(currenciesInfo);
-      console.log(currencyInfoArray);
       const currencyInfoArrayWithLogos = currencyInfoArray.map((crypto) => {
         return {
           id: crypto.id,
@@ -53,11 +56,27 @@ export const fetchCryptosInfo = createAsyncThunk(
   }
 );
 
+export const fetchOHLCV = createAsyncThunk(
+  "cryptosList/fetchOHLCV",
+  async (symbol) => {
+    try {
+      const chartData = await axios.get(
+        `http://localhost:5000/api/cryptos/${symbol}`
+      );
+      console.log(chartData);
+      return chartData.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
 export const cryptoSlice = createSlice({
   name: "cryptos",
   initialState: {
     cryptosList: [],
     cryptosInfoList: [],
+    currentChartData: {},
     totalCryptos: 0,
     pageSize: 20,
     pageNum: 1,
@@ -70,6 +89,9 @@ export const cryptoSlice = createSlice({
     });
     builder.addCase(fetchCryptosInfo.fulfilled, (state, action) => {
       state.cryptosInfoList = action.payload;
+    });
+    builder.addCase(fetchOHLCV.fulfilled, (state, action) => {
+      state.currentChartData = action.payload;
     });
   },
 });
