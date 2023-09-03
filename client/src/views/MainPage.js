@@ -1,31 +1,23 @@
 import BaseCard from "../components/UI/BaseCard";
 import classes from "./MainPage.module.scss";
 import { useSelector } from "react-redux";
+import Pagination from "../components/layout/Pagination";
 
 function MainPage() {
   const cryptosList = useSelector((state) => state.crypto.cryptosList);
-  const cryptosInfoList = useSelector((state) => state.crypto.cryptosInfoList);
-  console.log(cryptosList);
-  console.log(cryptosInfoList);
   return (
     <div className={classes["main-page"]}>
+      <h1 className={classes.title}>CryptoCheck.com</h1>
       {cryptosList.map((crypto) => (
         <BaseCard
           symbol={crypto?.symbol}
           key={crypto?.symbol}
-          name={
-            cryptosInfoList.find(
-              (cryptoInfo) => cryptoInfo.id === crypto?.symbol.split("/")[0]
-            )?.name
-          }
+          name={crypto?.name}
           price={crypto?.last}
-          logo={
-            cryptosInfoList.find(
-              (cryptoInfo) => cryptoInfo.id === crypto?.symbol.split("/")[0]
-            )?.logoUrl ?? ""
-          }
+          logo={crypto?.logoUrl ?? ""}
         ></BaseCard>
       ))}
+      <Pagination className={classes.pagination} />
     </div>
   );
 }

@@ -1,9 +1,1 @@
-.button {
-  background-color: orange;
-  font-weight: 600;
-}
-
-.button:hover,
-.button:active {
-  background-color: rgb(193, 125, 0);
-}
+@import '../../mixins.scss'

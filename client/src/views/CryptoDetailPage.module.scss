@@ -1,0 +1,20 @@
+@import "../mixins.scss";
+
+.card-base {
+  border-radius: 5px;
+}
+
+.main {
+  margin: 0 auto;
+  gap: 2.4rem;
+  margin-top: 4.8rem;
+  display: grid;
+  height: 100%;
+  width: 75%;
+}
+
+.btn-list {
+  list-style: none;
+  display: flex;
+  gap: 1.2rem;
+}

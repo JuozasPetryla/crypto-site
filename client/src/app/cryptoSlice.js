@@ -1,55 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {  coinbasepro } from "ccxt";
 import axios from "axios";
 
 export const fetchCryptos = createAsyncThunk(
   "cryptosList/fetchCryptos",
-  async (pageNum = 1) => {
+  async ({ search = "", pageNum = 1 }) => {
     try {
-      const exchange = new coinbasepro();
-
-      const currencies = await exchange.fetchTickers();
-      const currencyArray = Object.values(currencies);
-
-      const filteredArray = currencyArray.filter((currency) => {
-        return (
-          currency.symbol.includes("USD") &&
-          !currency.symbol.includes(":") &&
-          !currency.symbol.includes("USDT") &&
-          !currency.symbol.includes("-")
-        );
-      });
-
-      const sortedArray = filteredArray.sort(
-        ({ last: a }, { last: b }) => b - a
+      const cryptos = await axios.get(
+        `http://localhost:5000/api/cryptos?search=${search}&pageNum=${pageNum}`
       );
-
-      const startIndex = (pageNum - 1) * 20;
-      const endIndex = startIndex + 20;
-      const pagedArray = sortedArray.slice(startIndex, endIndex);
-
-      return pagedArray;
-    } catch (err) {
-      console.log(err.message);
-    }
-  }
-);
-
-export const fetchCryptosInfo = createAsyncThunk(
-  "cryptosList/fetchCryptosInfo",
-  async () => {
-    try {
-      const exchange = new coinbasepro();
-      const currenciesInfo = await exchange.fetchCurrencies();
-      const currencyInfoArray = Object.values(currenciesInfo);
-      const currencyInfoArrayWithLogos = currencyInfoArray.map((crypto) => {
-        return {
-          id: crypto.id,
-          name: crypto.name,
-          logoUrl: `https://assets.coincap.io/assets/icons/${crypto.id.toLowerCase()}@2x.png`,
-        };
-      });
-      return currencyInfoArrayWithLogos;
+      return cryptos.data;
     } catch (err) {
       console.log(err.message);
     }
@@ -58,15 +17,32 @@ export const fetchCryptosInfo = createAsyncThunk(
 
 export const fetchOHLCV = createAsyncThunk(
   "cryptosList/fetchOHLCV",
-  async (symbol) => {
+  async ({ symbol, granularity = 300, longTime = false }) => {
     try {
+      const hour = 1000 * 60 * 60;
+      let timeInterval;
+      if (granularity === 300) {
+        timeInterval = hour;
+      } else if (granularity === 900) {
+        timeInterval = hour * 24;
+      } else if (granularity === 3600) {
+        timeInterval = hour * 24 * 7;
+      } else if (granularity === 21600) {
+        timeInterval = hour * 24 * 31;
+      } else if (granularity === 86400 && longTime === "3months") {
+        timeInterval = hour * 24 * 31 * 3;
+      } else if (granularity === 86400 && longTime === "6months") {
+        timeInterval = hour * 24 * 31 * 6;
+      } else if (granularity === 86400 && longTime === "all") {
+        timeInterval = hour * 24 * 31 * 10;
+      }
+
       const chartData = await axios.get(
-        `http://localhost:5000/api/cryptos/${symbol}`
+        `http://localhost:5000/api/cryptos/ohlcv/${symbol}?granularity=${granularity}&timeInterval=${timeInterval}`
       );
-      console.log(chartData);
       return chartData.data;
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   }
 );
@@ -75,20 +51,22 @@ export const cryptoSlice = createSlice({
   name: "cryptos",
   initialState: {
     cryptosList: [],
-    cryptosInfoList: [],
     currentChartData: {},
     totalCryptos: 0,
     pageSize: 20,
     pageNum: 1,
+    totalPages: 0,
+    curPage: 1,
+    searchTerm: "",
   },
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchCryptos.fulfilled, (state, action) => {
-      state.cryptosList = action.payload;
-      state.totalCryptos = action.payload.length;
-    });
-    builder.addCase(fetchCryptosInfo.fulfilled, (state, action) => {
-      state.cryptosInfoList = action.payload;
+      state.cryptosList = action.payload.pagedArray;
+      state.totalCryptos = action.payload.totalCryptos;
+      state.totalPages = action.payload.totalPages;
+      state.curPage = action.payload.curPage;
+      state.searchTerm = action.payload.searchTerm;
     });
     builder.addCase(fetchOHLCV.fulfilled, (state, action) => {
       state.currentChartData = action.payload;

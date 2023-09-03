@@ -8,7 +8,7 @@ function BaseCard(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClick = () => {
-    dispatch(fetchOHLCV(symbol)).then(() => {
+    dispatch(fetchOHLCV({ symbol, granularity: 300 })).then(() => {
       navigate(`crypto-chart/${symbol}`);
     });
   };
@@ -24,7 +24,11 @@ function BaseCard(props) {
           Price: <strong className={classes.price}>${props.price}</strong>
         </p>
       </div>
-      <img src={props.logo} className={classes.image} />
+      <img
+        src={props.logo}
+        className={classes.image}
+        alt="Cryptocurrency logo"
+      />
     </div>
   );
 }

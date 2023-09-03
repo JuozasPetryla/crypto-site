@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 20rem;
+  width: 17.5rem;
   height: 12.5rem;
   padding-right: 3.2rem;
   background-color: $global-component-background;
@@ -35,4 +35,19 @@ p {
 .image {
   width: 4rem;
   height: 4rem;
+}
+
+@media (max-width: 1200px) {
+  .card-base {
+    width: 15rem;
+    height: 11.5rem;
+    padding-right: 1.2rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  .image {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
 }

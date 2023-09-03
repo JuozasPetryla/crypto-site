@@ -1,7 +1,7 @@
 import Header from "./components/layout/Header";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchCryptos, fetchCryptosInfo } from "./app/cryptoSlice";
+import { fetchCryptos } from "./app/cryptoSlice";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainPage from "./views/MainPage";
@@ -17,10 +17,6 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchCryptos());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(fetchCryptosInfo());
   }, [dispatch]);
 
   return (
