@@ -18,8 +18,8 @@ function BaseCard(props) {
       onClick={handleClick}
     >
       <div className={"card-body " + classes["card-body-text"]}>
-        <h3 className="card-title">{props.name}</h3>
-        <h5 className="card-title">{props.symbol}</h5>
+        <h3 className={"card-title " + classes['card-content']}>{props.name}</h3>
+        <h5 className={"card-title " + classes['card-content']}>{props.symbol}</h5>
         <p className="card-text">
           Price: <strong className={classes.price}>${props.price}</strong>
         </p>

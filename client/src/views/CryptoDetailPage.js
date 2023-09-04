@@ -8,19 +8,17 @@ import { useEffect, useState } from "react";
 function CryptoDetailPage() {
   const params = useParams();
   const dispatch = useDispatch();
-  const [timeUnits, setTimeUnit] = useState("minute");
   const [granularity, setGranularity] = useState(300);
   const [longTime, setLongTime] = useState(false);
 
-  function onChangeGranularity(gran, time, longTime) {
-    setGranularity(gran);
-    setTimeUnit(time);
+  function onChangeGranularity(gran, longTime) {
     setLongTime(longTime);
+    setGranularity(gran);
   }
 
   useEffect(() => {
     dispatch(fetchOHLCV({ symbol: params.id, granularity, longTime }));
-  }, [dispatch, granularity, timeUnits, params.id, longTime]);
+  }, [dispatch, granularity, params.id, longTime]);
 
   return (
     <div className={classes.main}>
@@ -28,7 +26,7 @@ function CryptoDetailPage() {
       <ul className={classes["btn-list"]}>
         <li>
           <button
-            onClick={() => onChangeGranularity(300, "minute")}
+            onClick={() => onChangeGranularity(300, false)}
             type="button"
             className={"btn " + classes.button}
           >
@@ -38,7 +36,7 @@ function CryptoDetailPage() {
 
         <li>
           <button
-            onClick={() => onChangeGranularity(900, "hour")}
+            onClick={() => onChangeGranularity(900, false)}
             type="button"
             className={"btn " + classes.button}
           >
@@ -47,7 +45,7 @@ function CryptoDetailPage() {
         </li>
         <li>
           <button
-            onClick={() => onChangeGranularity(3600, "day")}
+            onClick={() => onChangeGranularity(3600, false)}
             type="button"
             className={"btn " + classes.button}
           >
@@ -56,7 +54,7 @@ function CryptoDetailPage() {
         </li>
         <li>
           <button
-            onClick={() => onChangeGranularity(21600, "week")}
+            onClick={() => onChangeGranularity(21600, false)}
             type="button"
             className={"btn " + classes.button}
           >
@@ -65,7 +63,7 @@ function CryptoDetailPage() {
         </li>
         <li>
           <button
-            onClick={() => onChangeGranularity(86400, "month", "3months")}
+            onClick={() => onChangeGranularity(86400, "3months")}
             type="button"
             className={"btn " + classes.button}
           >
@@ -74,7 +72,7 @@ function CryptoDetailPage() {
         </li>
         <li>
           <button
-            onClick={() => onChangeGranularity(86400, "month", "6months")}
+            onClick={() => onChangeGranularity(86400, "6months")}
             type="button"
             className={"btn " + classes.button}
           >
@@ -83,7 +81,7 @@ function CryptoDetailPage() {
         </li>
         <li>
           <button
-            onClick={() => onChangeGranularity(86400, "month", "all")}
+            onClick={() => onChangeGranularity(86400, "all")}
             type="button"
             className={"btn " + classes.button}
           >
@@ -92,7 +90,7 @@ function CryptoDetailPage() {
         </li>
       </ul>
       <div className={"card " + classes["card-base"]}>
-        <CryptoChart timeUnit={timeUnits}></CryptoChart>
+        <CryptoChart></CryptoChart>
       </div>
     </div>
   );

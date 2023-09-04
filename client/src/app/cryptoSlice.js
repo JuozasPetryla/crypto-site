@@ -58,6 +58,7 @@ export const cryptoSlice = createSlice({
     totalPages: 0,
     curPage: 1,
     searchTerm: "",
+    timeUnit: "",
   },
   reducers: {},
   extraReducers: (builder) => {

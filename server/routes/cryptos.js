@@ -10,6 +10,7 @@ router.get("/cryptos/ohlcv/:id", async (req, res) => {
     const granularity = req.query.granularity;
     const timeInterval = req.query.timeInterval;
     const timeSince = todayTime - timeInterval;
+
     const ohlcv = await exchange.fetchOHLCV(`${symbol}-USD`, granularity, [
       timeSince,
     ]);

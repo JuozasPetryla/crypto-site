@@ -17,4 +17,30 @@
   list-style: none;
   display: flex;
   gap: 1.2rem;
+  padding: 0;
+}
+
+@media (max-width: 576px) {
+  .main {
+    margin-top: 3.2rem;
+    width: 80%;
+    margin-right: 2.4rem;
+  }
+  .button {
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 0.8rem !important;
+  }
+}
+
+@media (max-width: 460px) {
+  .button {
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 0.6rem !important;
+    padding: 0;
+  }
+  .btn-list {
+    gap: 0.6rem;
+  }
 }

@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "89d3306e-d9c7-4be9-a888-b6abac1a31dd",
+		"name": "Crypto-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28766124",
+		"_collection_link": "https://planetary-astronaut-532858.postman.co/workspace/Crypto-app~965d4ca8-bc1e-43b4-b696-fede00a44017/collection/28766124-89d3306e-d9c7-4be9-a888-b6abac1a31dd?action=share&source=collection_link&creator=28766124"
+	},
+	"item": [
+		{
+			"name": "fetch OHLCV",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/cryptos/BTC?granularity=300",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"cryptos",
+						"BTC"
+					],
+					"query": [
+						{
+							"key": "granularity",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetch cryptos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/cryptos?search=&pageNum=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"cryptos"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": ""
+						},
+						{
+							"key": "pageNum",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

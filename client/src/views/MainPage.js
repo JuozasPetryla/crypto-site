@@ -7,7 +7,7 @@ function MainPage() {
   const cryptosList = useSelector((state) => state.crypto.cryptosList);
   return (
     <div className={classes["main-page"]}>
-      <h1 className={classes.title}>CryptoCheck.com</h1>
+      <h2 className={classes.title}>CryptoCheck.com</h2>
       {cryptosList.map((crypto) => (
         <BaseCard
           symbol={crypto?.symbol}

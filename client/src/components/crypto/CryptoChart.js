@@ -23,23 +23,12 @@ function CryptoChart(props) {
   };
   const options = {
     responsive: true,
-    layout: {
-      padding: {
-        left: 20,
-        right: 20,
-        top: 20,
-        bottom: 20,
-      },
-    },
     scales: {
       x: {
         ticks: {
           color: "#cdcdcd",
         },
         type: "time",
-        time: {
-          unit: `${props.timeUnit}`,
-        },
         grid: {
           display: false,
         },
