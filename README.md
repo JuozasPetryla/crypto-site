@@ -39,6 +39,13 @@ Client side:
 - Redux
 - Sass
 
+Server side:
+
+- Ccxt
+- Cors
+- Express
+- Nodemon
+
 ## Styling
 
 For styling I used Bootstrap CSS framework, and for custom styles I used Sass modules for React components. Global variables and mixins are declared in the `_variables.scss` and `_mixins.sccs` files respectively.
@@ -53,4 +60,4 @@ State is managed by Redux. All of the state related files can be found in the /c
 
 ## API Integration
 
-We communicate with out backend API using the Axios library. All of the API calls are done inside the Redux `CryptoSlice.js` file. Further information about the API in the [API README.md file](server\README.md).
+We communicate with out backend API using the Axios library. All of the API calls are done inside the Redux `CryptoSlice.js` file. Further information about the API in the [API README.md file](server/README.md).
