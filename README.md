@@ -10,7 +10,6 @@ Welcome, this the documentation of my cryptocurrency application.
 4. [Routing](#routing)
 5. [State Management](#state-management)
 6. [API Integration](#api-integration)
-7. [Testing](#testing)
 
 ## Getting Started
 
