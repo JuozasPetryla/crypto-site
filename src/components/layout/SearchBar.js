@@ -30,6 +30,7 @@ function SearchBar() {
     }
     validateInput();
     dispatch(fetchCryptos({ search: debouncedSearchTerm }));
+    // eslint-disable-next-line
   }, [debouncedSearchTerm, dispatch]);
 
   return (

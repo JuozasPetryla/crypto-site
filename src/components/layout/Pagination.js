@@ -24,6 +24,7 @@ function Pagination() {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line
     dispatch(fetchCryptos({ search, pageNum }));
   }, [dispatch, pageNum]);
 
