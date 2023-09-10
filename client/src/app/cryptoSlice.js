@@ -6,7 +6,7 @@ export const fetchCryptos = createAsyncThunk(
   async ({ search = "", pageNum = 1 }) => {
     try {
       const cryptos = await axios.get(
-        `http://localhost:5000/api/cryptos?search=${search}&pageNum=${pageNum}`
+        `https://crypto-check-data.onrender.com/api/cryptos?search=${search}&pageNum=${pageNum}`
       );
       return cryptos.data;
     } catch (err) {
@@ -38,7 +38,7 @@ export const fetchOHLCV = createAsyncThunk(
       }
 
       const chartData = await axios.get(
-        `http://localhost:5000/api/cryptos/ohlcv/${symbol}?granularity=${granularity}&timeInterval=${timeInterval}`
+        `https://crypto-check-data.onrender.com/api/cryptos/ohlcv/${symbol}?granularity=${granularity}&timeInterval=${timeInterval}`
       );
       return chartData.data;
     } catch (err) {
