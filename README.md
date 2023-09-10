@@ -1,6 +1,7 @@
 # Crypto check application.
 
-Welcome, this the documentation of my cryptocurrency application.
+Welcome, this the documentation of my cryptocurrency application. Frontend is hosted on Netlify and backend on Render.
+https://crypto-check-site.netlify.app/
 
 ## Table of contents
 
