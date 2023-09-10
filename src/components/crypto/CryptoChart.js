@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { Line } from "react-chartjs-2";
 import classes from "./CryptoChart.module.scss";
 
+import Chart from "chart.js/auto";
 import "chartjs-adapter-moment";
 
 function CryptoChart(props) {

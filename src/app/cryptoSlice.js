@@ -1,14 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const baseUrl = "https://crypto-check-data.onrender.com/api";
-
 export const fetchCryptos = createAsyncThunk(
   "cryptosList/fetchCryptos",
   async ({ search = "", pageNum = 1 }) => {
     try {
       const cryptos = await axios.get(
-        `${baseUrl}/cryptos?search=${search}&pageNum=${pageNum}`
+        `https://crypto-check-data.onrender.com/api/cryptos?search=${search}&pageNum=${pageNum}`
       );
       return cryptos.data;
     } catch (err) {
@@ -40,8 +38,9 @@ export const fetchOHLCV = createAsyncThunk(
       }
 
       const chartData = await axios.get(
-        `${baseUrl}/cryptos/ohlcv/${symbol}?granularity=${granularity}&timeInterval=${timeInterval}`
+        `https://crypto-check-data.onrender.com/api/cryptos/ohlcv/${symbol}?granularity=${granularity}&timeInterval=${timeInterval}`
       );
+      console.log(chartData);
       return chartData.data;
     } catch (err) {
       console.log(err.message);
